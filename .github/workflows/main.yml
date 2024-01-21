@@ -1,19 +1,21 @@
-   
-name: Node Js CI/CD
+name: Node.js CI/CD
+
 on:
-  push: 
-    branches: 
+  push:
+    branches:
       - main
-jobs: 
-  build: 
+jobs:
+  build:
     runs-on: ubuntu-latest
-    steps: 
-    - name: checkout repository
+    steps:
+    - name: Checkout repo
       uses: actions/checkout@v2
-    - name: setup Node.js
+    - name: Set Node.js
       uses: actions/setup-node@v3
-      with: 
-        node-version: '14'
-        
-    - name: install dependencies
-      uses: npm install
+      with:
+        node-version: '13'
+
+    - name: Install dependencies
+      run: npm install
+
+
