@@ -1,8 +1,9 @@
-name: Nightly Build
+name: Node.js CI/CD
 
-on: push
-  
-    
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '14'
@@ -20,5 +21,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run nightly tasks
-      run: ./nightly.sh
+    - name: Run tests
+      run: npm test
+
+    - name: Deploy to production
+      if: success()
+      run: ./deploy.sh
